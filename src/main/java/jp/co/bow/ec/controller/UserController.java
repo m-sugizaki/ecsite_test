@@ -31,7 +31,7 @@ import jp.co.bow.ec.model.UserModel;
 import jp.co.bow.ec.service.UserService;
 
 @Controller
-@SessionAttributes({"userEntity","CartContents","user_StoreEntity"})//しっかりできるか不安
+@SessionAttributes({"userEntity","CartContents","user_StoreEntity"})//縺励▲縺九ｊ縺ｧ縺阪ｋ縺倶ｸ榊ｮ�
 public class UserController {
 	@Autowired
 	UserService userService;
@@ -80,13 +80,13 @@ public class UserController {
 	}
 
 
-	//トップ画面表示
+	//繝医ャ繝礼判髱｢陦ｨ遉ｺ
 	@RequestMapping(value="/top",method=RequestMethod.GET)
 	public String toTop(@ModelAttribute UserEntity userEntity,Model model) {
-		//セッション有無確認
+		//繧ｻ繝�繧ｷ繝ｧ繝ｳ譛臥┌遒ｺ隱�
 
 //		if(userEntity.getUser_id() == null) {
-//			userEntity.setNickname("ゲスト");
+//			userEntity.setNickname("繧ｲ繧ｹ繝�");
 //		}
 		return "top";
 	}
@@ -96,7 +96,7 @@ public class UserController {
 		return"login";
 	}
 
-	//ログイン認証用メソッド
+	//繝ｭ繧ｰ繧､繝ｳ隱崎ｨｼ逕ｨ繝｡繧ｽ繝�繝�
 	@RequestMapping(value="/checkUser",method=RequestMethod.POST, params="login")//value="/checkUser"
 	public String checkUser(@Validated @ModelAttribute LoginModel loginModel,BindingResult result,Model model) {
 
@@ -109,7 +109,7 @@ public class UserController {
 
 		User_StoreEntity loginCheck = userService.loginCheck(userStoreEntity);
 
-		if(null!=loginCheck) {//login確認
+		if(null!=loginCheck) {//login遒ｺ隱�
 			if(loginCheck.getUser_id().equals(loginModel.getUser_id())&&loginCheck.getPassword().equals(loginModel.getPassword())) {
 			int countCart = 0;
 			UserEntity userEntity = new UserEntity();
@@ -121,16 +121,16 @@ public class UserController {
 				countCart++;
 			}
 			 */
-			//パーチェスプロダクトサービス完成後実装すること。
+			//繝代�ｼ繝√ぉ繧ｹ繝励Ο繝�繧ｯ繝医し繝ｼ繝薙せ螳梧�仙ｾ悟ｮ溯｣�縺吶ｋ縺薙→縲�
 
 			model.addAttribute("userEntity",userEntity);
 			//model.addAttribute("CartContents",countCart);
 			return "top";
 			}
-			model.addAttribute("errorMessage","ユーザーIDまたはパスワードが間違っています。");
+			model.addAttribute("errorMessage","繝ｦ繝ｼ繧ｶ繝ｼID縺ｾ縺溘�ｯ繝代せ繝ｯ繝ｼ繝峨′髢馴＆縺｣縺ｦ縺�縺ｾ縺吶��");
 			return"login";
 		}else {
-			model.addAttribute("errorMessage","ユーザーIDまたはパスワードが間違っています。");
+			model.addAttribute("errorMessage","繝ｦ繝ｼ繧ｶ繝ｼID縺ｾ縺溘�ｯ繝代せ繝ｯ繝ｼ繝峨′髢馴＆縺｣縺ｦ縺�縺ｾ縺吶��");
 			return"login";
 			}
 
@@ -138,14 +138,14 @@ public class UserController {
 
 	@RequestMapping(value="/checkUser",method=RequestMethod.POST, params="cancel")
 	public String cancel() {
-		return"redirect:/top";//GETメソッドを呼び出す。
+		return"redirect:/top";//GET繝｡繧ｽ繝�繝峨ｒ蜻ｼ縺ｳ蜃ｺ縺吶��
 	}
 	@RequestMapping(value="/registUserInfo",method=RequestMethod.POST,params="back")
 	public String back(SessionStatus status) {
 		status.setComplete();
 		return "redirect:/registUser";
 	}
-	//新規登録画面の表示
+	//譁ｰ隕冗匳骭ｲ逕ｻ髱｢縺ｮ陦ｨ遉ｺ
 	@RequestMapping(value="/registUser",method=RequestMethod.GET)
 	public String toRegist() {
 		return "registUser";
@@ -158,22 +158,22 @@ public class UserController {
 		}
 		if(userModel.getPassword().equals(userModel.getPassword2()) && null == userService.checkUserId(userModel.getUser_id())){
 
-			//nullの時登録可能
+			//null縺ｮ譎ら匳骭ｲ蜿ｯ閭ｽ
 			User_StoreEntity user_StoreEntity= new User_StoreEntity();
 			user_StoreEntity.setPassword(userModel.getPassword());
 			user_StoreEntity.setUser_id(userModel.getUser_id());
 			model.addAttribute("user_StoreEntity",user_StoreEntity);
 
-		} else if(null != userService.checkUserId(userModel.getUser_id()) && userModel.getPassword().equals(userModel.getPassword2())){//UserIdが既に存在していた場合
-			model.addAttribute("errorMessage1","ユーザーIDは既に登録されています。");
+		} else if(null != userService.checkUserId(userModel.getUser_id()) && userModel.getPassword().equals(userModel.getPassword2())){//UserId縺梧里縺ｫ蟄伜惠縺励※縺�縺溷�ｴ蜷�
+			model.addAttribute("errorMessage1","繝ｦ繝ｼ繧ｶ繝ｼID縺ｯ譌｢縺ｫ逋ｻ骭ｲ縺輔ｌ縺ｦ縺�縺ｾ縺吶��");
 			return "registUser";
 
 		} else if(!userModel.getPassword().equals(userModel.getPassword2()) && null == userService.checkUserId(userModel.getUser_id())){
-			model.addAttribute("errorMessage2","確認用パスワードが間違っています。");
+			model.addAttribute("errorMessage2","遒ｺ隱咲畑繝代せ繝ｯ繝ｼ繝峨′髢馴＆縺｣縺ｦ縺�縺ｾ縺吶��");
 			return "registUser";
 		} else {
-			model.addAttribute("errorMessage1","ユーザーIDは既に登録されています。");
-			model.addAttribute("errorMessage2","確認用パスワードが間違っています。");
+			model.addAttribute("errorMessage1","繝ｦ繝ｼ繧ｶ繝ｼID縺ｯ譌｢縺ｫ逋ｻ骭ｲ縺輔ｌ縺ｦ縺�縺ｾ縺吶��");
+			model.addAttribute("errorMessage2","遒ｺ隱咲畑繝代せ繝ｯ繝ｼ繝峨′髢馴＆縺｣縺ｦ縺�縺ｾ縺吶��");
 			return "registUser";
 		}
 		return "registUserInfo";
@@ -204,11 +204,11 @@ public class UserController {
 			userEntity.setPhone_number(userInfoModel.getPhone_number());
 			userEntity.setPostal_code(userInfoModel.getPostal_code());
 
-			model.addAttribute("userEntity",userEntity);//sessionに登録
+			model.addAttribute("userEntity",userEntity);//session縺ｫ逋ｻ骭ｲ
 //			userService.createLoginTime(userStoreEntity);
 //			userService.createUserInfo(userEntity);
 //			userService.createUser(userStoreEntity);
-			//クレカの月、年のリストを渡す処理↓
+			//繧ｯ繝ｬ繧ｫ縺ｮ譛医�∝ｹｴ縺ｮ繝ｪ繧ｹ繝医ｒ貂｡縺吝�ｦ逅�竊�
 
 
 //			Calendar cal= Calendar.getInstance();
@@ -217,9 +217,9 @@ public class UserController {
 			//
 
 			return "confirm";
-			//return "payMethod";//confirm画面に飛ばす。
+			//return "payMethod";//confirm逕ｻ髱｢縺ｫ鬟帙�ｰ縺吶��
 		} else {
-			model.addAttribute("errorMessage","そのEmailアドレスは登録されています");
+			model.addAttribute("errorMessage","縺昴�ｮEmail繧｢繝峨Ξ繧ｹ縺ｯ逋ｻ骭ｲ縺輔ｌ縺ｦ縺�縺ｾ縺�");
 			attributes.addFlashAttribute("userInfoModel",userInfoModel);
 
 			return "registUserInfo";
@@ -270,7 +270,7 @@ public class UserController {
 			userService.createCard(payment_MethodEntity);
 			return "shipAddress";
 		} else {
-			model.addAttribute("errorMessage", "そのカードは登録されています。");
+			model.addAttribute("errorMessage", "縺昴�ｮ繧ｫ繝ｼ繝峨�ｯ逋ｻ骭ｲ縺輔ｌ縺ｦ縺�縺ｾ縺吶��");
 			attributes.addFlashAttribute("paymentMethodModel",paymentMethodModel);
 			Calendar cal= Calendar.getInstance();
 			model.addAttribute("years",getNumberList(cal.get(Calendar.YEAR),cal.get(Calendar.YEAR)+10));
@@ -297,13 +297,13 @@ public class UserController {
 		shipping_AddressEntity.setShipping_address_name(shipAddressModel.getShipping_address_name());
 		shipping_AddressEntity.setUser_id(shipAddressModel.getUser_id());
 		userService.createShip(shipping_AddressEntity);
-		attributes.addFlashAttribute("finishMessage","会員登録が完了しました。ログインしてください。");
+		attributes.addFlashAttribute("finishMessage","莨壼藤逋ｻ骭ｲ縺悟ｮ御ｺ�縺励∪縺励◆縲ゅΟ繧ｰ繧､繝ｳ縺励※縺上□縺輔＞縲�");
 		status.setComplete();
 		return "redirect:/top";
 	}
 	@RequestMapping(value="/registShip", method=RequestMethod.POST, params="skip")
 	public String notRegistShip(SessionStatus status,RedirectAttributes attributes,Model model) {
-		attributes.addFlashAttribute("finishMessage","会員登録が完了しました。ログインしてください。");
+		attributes.addFlashAttribute("finishMessage","莨壼藤逋ｻ骭ｲ縺悟ｮ御ｺ�縺励∪縺励◆縲ゅΟ繧ｰ繧､繝ｳ縺励※縺上□縺輔＞縲�");
 		status.setComplete();
 		return "redirect:/top";
 	}
@@ -313,3 +313,4 @@ public class UserController {
 		return "redirect:/top";
 	}
 }
+// test
