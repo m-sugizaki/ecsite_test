@@ -15,7 +15,7 @@
     <ul>
 
         <li><a href="top">マイページ</a></li>
-        <li><a href="#">商品検索</a></li>
+        <li><a href="search">商品検索</a></li>
         <c:if test="${userEntity.user_id != null}">
         <li><a href="#">カート詳細</a></li>
         <li><a href="#">購入履歴</a></li>
