@@ -1,22 +1,19 @@
-package jp.co.bow.ec.entity;
+package jp.co.bow.ec.model;
 
 import java.io.Serializable;
 
-public class ProductEntity implements Serializable {
+public class ProductInfoModel implements Serializable {
 	private String product_id;
 	private String product_name;
 	private String maker;
-	private int price;
+	private String price;
 	private String size;
 	private String color;
 	private String sale_point;
-	private byte[] image;
-	//画像のデータを16進数から64進数に変換時に使用する変数
-	private String base64string;
-	private int stock_quantity;
+	private String stock_quantity;
+	private String image;
 	private String similar_product_id;
-	private int price_start;
-	private int price_end;
+	private String quantity;
 
 	public String getProduct_id() {
 		return product_id;
@@ -36,10 +33,10 @@ public class ProductEntity implements Serializable {
 	public void setMaker(String maker) {
 		this.maker = maker;
 	}
-	public int getPrice() {
+	public String getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 	public String getSize() {
@@ -60,17 +57,17 @@ public class ProductEntity implements Serializable {
 	public void setSale_point(String sale_point) {
 		this.sale_point = sale_point;
 	}
-	public byte[] getImage() {
-		return image;
-	}
-	public void setImage(byte[] image) {
-		this.image = image;
-	}
-	public int getStock_quantity() {
+	public String getStock_quantity() {
 		return stock_quantity;
 	}
-	public void setStock_quantity(int stock_quantity) {
+	public void setStock_quantity(String stock_quantity) {
 		this.stock_quantity = stock_quantity;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
 	public String getSimilar_product_id() {
 		return similar_product_id;
@@ -78,23 +75,12 @@ public class ProductEntity implements Serializable {
 	public void setSimilar_product_id(String similar_product_id) {
 		this.similar_product_id = similar_product_id;
 	}
-	public String getBase64string() {
-		return base64string;
+	public String getQuantity() {
+		return quantity;
 	}
-	public void setBase64string(String base64string) {
-		this.base64string = base64string;
+	public void setQuantity(String quantity) {
+		this.quantity = quantity;
 	}
-	public int getPrice_start() {
-		return price_start;
-	}
-	public void setPrice_start(int price_start) {
-		this.price_start = price_start;
-	}
-	public int getPrice_end() {
-		return price_end;
-	}
-	public void setPrice_end(int price_end) {
-		this.price_end = price_end;
-	}
+
 
 }
