@@ -84,7 +84,7 @@ public class UserController {
 	@RequestMapping(value="/top",method=RequestMethod.GET)
 	public String toTop(@ModelAttribute UserEntity userEntity,Model model) {
 		//セッション有無確認
-// コメントテスト
+
 //		if(userEntity.getUser_id() == null) {
 //			userEntity.setNickname("ゲスト");
 //		}
@@ -312,5 +312,4 @@ public class UserController {
 		status.setComplete();
 		return "redirect:/top";
 	}
-	//コメントdesudesu
 }
