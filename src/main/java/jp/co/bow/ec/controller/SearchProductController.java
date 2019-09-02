@@ -1,5 +1,6 @@
 package jp.co.bow.ec.controller;
 
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jp.co.bow.ec.entity.ProductEntity;
+import jp.co.bow.ec.model.ProductInfoModel;
 import jp.co.bow.ec.model.SearchProductInfoModel;
 import jp.co.bow.ec.service.SearchProductService;
 
@@ -29,24 +31,38 @@ public class SearchProductController {
 		return new SearchProductInfoModel();
 	}
 
+	@ModelAttribute("productInfoModel")
+	public ProductInfoModel setProductInfoModel() {
+		return new ProductInfoModel();
+	}
+
 	//商品検索画面表示
 	@RequestMapping(value="/search", method=RequestMethod.GET)
 	public String toSearchProduct(Model model) {
 		return "searchProduct";
 	}
+
+	//商品詳細画面に遷移
 	@RequestMapping(value="/detail",method=RequestMethod.POST,params="detail")
 	public String toProductInfo(@ModelAttribute SearchProductInfoModel searchProductInfoModel, Model model) {
 
+		//商品コードの一致する商品の詳細情報を取得
 		ProductEntity product = searchProductService.findOneProduct(searchProductInfoModel.getProduct_id());
-		product.setBase64string(Base64.getEncoder().encodeToString(product.getImage()));
-
 		/*データベースから取得した画像のデータを16進数から64進数に変換する
-		java.util.Base64をインポートする必要あり*/
-		/*for(ProductEntity pro : products) {
-		pro.setBase64string(Base64.getEncoder().encodeToString(pro.getImage()));
-	}*/
-
+		   これによってサイトのパフォーマンスが向上する*/
+		product.setBase64string(Base64.getEncoder().encodeToString(product.getImage()));
 		model.addAttribute("product",product);
+
+		//サイズのプルダウン
+		List<String> size =Arrays.asList(product.getSize().split(","));
+		model.addAttribute("size",size);
+
+		//商品コードの一致する商品の口コミを取得
+		//List<ReviewEntity> review = searchProductService.getReview(searchProductInfoModel.getProduct_id());
+		//model.addAttribute("review",review);
+
+
+
 
 		return "productInfo";//商品詳細画面遷移
 	}
@@ -71,10 +87,12 @@ public class SearchProductController {
 		else if(ps.isEmpty() ) {
 			ps = "0";
 			entity.setPrice_start(Integer.parseInt(ps));
+			entity.setPrice_end(Integer.parseInt(pe));
 		}
 		else if(pe.isEmpty() ) {
 			pe = "2147483647";
 			entity.setPrice_end(Integer.parseInt(pe));
+			entity.setPrice_start(Integer.parseInt(ps));
 		}
 		else if((pe).compareTo(ps) < 0) {
 			attributes.addFlashAttribute("errorMessage10","入力値が不正です。");
