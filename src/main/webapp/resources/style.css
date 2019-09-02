@@ -1,0 +1,93 @@
+@charset "UTF-8";
+
+.errors{
+	color:red;
+}
+
+body {
+	min-width: 980px;
+	position: relative;
+	left: 0;
+	overflow-x: hidden;
+}
+.main {
+	margin-top:120px;
+	margin-bottom:35px;
+	margin-left:25px
+}
+
+.wrapper {
+	 min-height: 100vh;
+	position: relative; /*←相対位置*/
+	padding-bottom: 10px; /*←footerの高さ*/
+	box-sizing: border-box; /*←全て含めてmin-height:100vhに*/
+}
+
+#button{
+	width:36px;
+	height:36px;
+}
+
+#header img {
+	display: inline-block;
+	padding: 0px 50px;
+}
+
+#header div {
+	display: inline-block;
+	padding: 0px 50px;
+}
+
+#header h1 {
+	display: inline-block;
+	padding: 0px 150px;
+}
+
+#header {
+	top: 0px;
+	min-width: 980px;
+	left: 0px;
+	width: 100%;
+	height: 90px;
+	background-color: #9BD1E5;
+}
+
+
+
+#footer {
+	margin-top: auto;
+	left: 0px; /* 位置(左0px) */
+	width: 100%; /* 横幅100%　*/
+	background-color: #9BD1E5;
+	padding: 10px 0;
+	position: absolute; /*←絶対位置*/
+	bottom: 0; /*下に固定*/
+}
+
+#slide_menu {
+	position: fixed;
+	top: 0;
+	left: -240px;
+	width: 240px;
+	height: 100%;
+	background-color: #6a8eae;
+}
+
+a {
+	text-decoration: none;
+}
+
+nav{
+	width:100%;
+}
+
+nav.fixed{
+	position:fixed;
+	left:0;
+	top:0;
+}
+nav.fix{
+	position:fixed;
+	left:300;
+	top:0;
+}
