@@ -28,70 +28,47 @@ button{
 <jsp:include page="header.jsp" />
 <div class="main">
 	<h1>商品詳細</h1>
-	<table border="0">
-	<form:form action="detail" modelAttribute="searchProductInfoModel">
-	<tr>
-	<th>商品ID</th>
-	<td>${product.product_id}</td>
-	</tr>
-	<tr>
-	<th>商品名</th>
-	<td>${product.product_name}</td>
-	</tr>
-	<tr>
-	<th>メーカー</th>
-	<td>${product.maker}</td>
-	</tr>
-	<tr>
-	<th>価格</th>
-	<td>${product.price}</td>
-	</tr>
-	<tr>
-	<th>サイズ</th>
-	<td>${product.size}</td>
-	</tr>
-	<tr>
-	<th>色</th>
-	<td>${product.color}</td>
-	</tr>
-	<tr>
-	<th>セールスポイント</th>
-	<td>${product.sale_point}</td>
-	</tr>
-	<tr>
-	<th>在庫数</th>
-	<td>${product.stock_quantity}</td>
-	</tr>
-	<tr>
-	<th>写真</th>
-	<td><img src="data:image/.jpg;base64,${product.base64string}"></td>
-	</tr>
-	<tr>
-	<th>類似商品コード</th><!-- similar_product_idは使わないので、コントローラーででき次第変更 -->
-	<td><form:button name="detail">${product.similar_product_id}</form:button></td>
-	</tr>
-	<tr>
-	<th>数量</th>
-	<td></td>
-	</tr>
-	<tr>
-	<th>購入金額</th>
-	<td>${product.price}</td>
-	</tr>
+	<dl>
+		<form:form action="detail" modelAttribute="searchProductInfoModel">
+			<dt>商品ID</dt>
+				<dd>${product.product_id}</dd>
+			<dt>商品名</dt>
+				<dd>${product.product_name}</dd>
+			<dt>メーカー</dt>
+				<dd>${product.maker}</dd>
+			<dt>価格</dt>
+				<dd>${product.price}</dd>
+			<dt>サイズ</dt>
+				<dd>${product.size}</dd>
+			<dt>色</dt>
+				<dd>${product.color}</dd>
+			<dt>セールスポイント</dt>
+				<dd>${product.sale_point}</dd>
+			<dt>在庫数</dt>
+				<dd>${product.stock_quantity}</dd>
+			<dt>写真</dt>
+				<dd><img src="data:image/.jpg;base64,${product.base64string}"></dd>
+			<dt>類似商品コード</dt><!-- similar_product_idは使わないので、コントローラーででき次第変更 -->
+				<dd><form:button name="detail">${product.similar_product_id}</form:button></dd>
+			<dt>数量</dt>
+				<dd>${product.quantity}</dd>
+			<dt>購入金額</dt>
+				<dd>${product.price}</dd>
+		</form:form>
+	</dl>
 		<!-- 画像の表示 拡張子は.jpgで固定 -->
 		<!-- <img src="data:image/.jpg;base64,${product.base64string}"> -->
-		</form:form>
-</table>
-<form:form modelAttribute="searchProductInfoModel">
-	<form:button name="#" class="btn">カートに入れる</form:button>
-	<form:button name="#" class="btn">レジに進む</form:button>
-	<form:button name="return" class="btn">戻る</form:button>
-			</form:form>
-	</div>
-			<jsp:include page="footer.jsp" />
-		<jsp:include page="menu.jsp" />
 
-		</div>
+	<form:form modelAttribute="searchProductInfoModel">
+		<form:button name="#" class="btn">カートに入れる</form:button>
+		<form:button name="#" class="btn">レジに進む</form:button>
+		<form:button name="return" class="btn">戻る</form:button>
+	</form:form>
+</div>
+<jsp:include page="footer.jsp" />
+<jsp:include page="menu.jsp" />
+
+</div>
 
 </body>
 </html>
