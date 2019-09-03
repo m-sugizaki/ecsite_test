@@ -44,25 +44,26 @@ public class SearchProductController {
 
 	//商品詳細画面に遷移
 	@RequestMapping(value="/detail",method=RequestMethod.POST,params="detail")
-	public String toProductInfo(@ModelAttribute SearchProductInfoModel searchProductInfoModel, Model model) {
+	public String toProductInfo(@ModelAttribute ProductInfoModel ProductInfoModel, Model model) {
 
 		//商品コードの一致する商品の詳細情報を取得
-		ProductEntity product = searchProductService.findOneProduct(searchProductInfoModel.getProduct_id());
+		ProductEntity product = searchProductService.findOneProduct(ProductInfoModel.getProduct_id());
 		/*データベースから取得した画像のデータを16進数から64進数に変換する
 		   これによってサイトのパフォーマンスが向上する*/
 		product.setBase64string(Base64.getEncoder().encodeToString(product.getImage()));
 		model.addAttribute("product",product);
 
 		//サイズのプルダウン
-		List<String> size =Arrays.asList(product.getSize().split(","));
-		model.addAttribute("size",size);
+		List<String> sizes =Arrays.asList(product.getSize().split(","));
+		model.addAttribute("sizes",sizes);
+
+		//色のプルダウン
+		List<String> colors =Arrays.asList(product.getColor().split(","));
+		model.addAttribute("colors",colors);
 
 		//商品コードの一致する商品の口コミを取得
 		//List<ReviewEntity> review = searchProductService.getReview(searchProductInfoModel.getProduct_id());
 		//model.addAttribute("review",review);
-
-
-
 
 		return "productInfo";//商品詳細画面遷移
 	}
@@ -96,6 +97,9 @@ public class SearchProductController {
 		}
 		else if((pe).compareTo(ps) < 0) {
 			attributes.addFlashAttribute("errorMessage10","入力値が不正です。");
+		}else {
+			entity.setPrice_end(Integer.parseInt(pe));
+			entity.setPrice_start(Integer.parseInt(ps));
 		}
 			List<ProductEntity> products = searchProductService.searchResult(entity);
 			attributes.addFlashAttribute("products",products);
@@ -109,4 +113,7 @@ public class SearchProductController {
 		status.setComplete();
 		return "redirect:/search";//GETメソッドを呼び出す。
 	}
+
+	//カートに追加
+
 }
