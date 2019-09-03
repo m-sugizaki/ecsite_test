@@ -1,4 +1,3 @@
-
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -29,7 +28,7 @@ button{
 <div class="main">
 	<h1>商品詳細</h1>
 	<table border="0">
-	<form:form action="detail" modelAttribute="searchProductInfoModel">
+	<form:form action="detail" modelAttribute="productInfoModel">
 	<tr>
 	<th>商品ID</th>
 	<td>${product.product_id}</td>
@@ -48,7 +47,7 @@ button{
 	</tr>
 	<tr>
 	<th>サイズ</th>
-	<td>${product.size}</td>
+	<td><form:select path="size" items="${size}" /></td>
 	</tr>
 	<tr>
 	<th>色</th>
@@ -67,7 +66,7 @@ button{
 	<td><img src="data:image/.jpg;base64,${product.base64string}"></td>
 	</tr>
 	<tr>
-	<th>類似商品コード</th><!-- similar_product_idは使わないので、コントローラーででき次第変更 -->
+	<th>類似商品コード</th><!-- similar_product_idは使わないので、コントローラーができ次第変更 -->
 	<td><form:button name="detail">${product.similar_product_id}</form:button></td>
 	</tr>
 	<tr>

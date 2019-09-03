@@ -44,10 +44,10 @@ public class SearchProductController {
 
 	//商品詳細画面に遷移
 	@RequestMapping(value="/detail",method=RequestMethod.POST,params="detail")
-	public String toProductInfo(@ModelAttribute SearchProductInfoModel searchProductInfoModel, Model model) {
+	public String toProductInfo(@ModelAttribute ProductInfoModel productInfoModel, Model model) {
 
 		//商品コードの一致する商品の詳細情報を取得
-		ProductEntity product = searchProductService.findOneProduct(searchProductInfoModel.getProduct_id());
+		ProductEntity product = searchProductService.findOneProduct(productInfoModel.getProduct_id());
 		/*データベースから取得した画像のデータを16進数から64進数に変換する
 		   これによってサイトのパフォーマンスが向上する*/
 		product.setBase64string(Base64.getEncoder().encodeToString(product.getImage()));

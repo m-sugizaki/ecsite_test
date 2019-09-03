@@ -79,7 +79,7 @@ button{
 		<c:forEach var="product" items="${products}">
 			<tr>
 				<form:form action="detail" modelAttribute="searchProductInfoModel">
-					<td><form:button name="detail">${product.product_id}</form:button></td>
+					<td><form:button name="detail"><img src="data:image/.jpg;base64,${product.base64string}"></form:button></td>
 					<form:hidden path="product_id" value="${product.product_id}" />
 					<td>${product.product_name}</td>
 					<td>${product.maker}</td>
