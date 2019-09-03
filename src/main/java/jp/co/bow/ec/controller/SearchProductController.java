@@ -78,10 +78,10 @@ public class SearchProductController {
 		String pe= searchProductInfoModel.getPrice_end();//最大価格
 		if(ps.isEmpty() && pe.isEmpty()) {
 			//最低価格に何も入力しない場合、強制的に0を入力させる
-				ps = "0";
+			ps = "0";
 			entity.setPrice_start(Integer.parseInt(ps));
 			//最大価格に何も入力しない場合、強制的に2147483647(int型の最大値)を入力させる
-				pe = "2147483647";
+			pe = "2147483647";
 			entity.setPrice_end(Integer.parseInt(pe));
 		}
 		else if(ps.isEmpty() ) {
@@ -91,14 +91,17 @@ public class SearchProductController {
 		}
 		else if(pe.isEmpty() ) {
 			pe = "2147483647";
-			entity.setPrice_end(Integer.parseInt(pe));
 			entity.setPrice_start(Integer.parseInt(ps));
+			entity.setPrice_end(Integer.parseInt(pe));
 		}
 		else if((pe).compareTo(ps) < 0) {
 			attributes.addFlashAttribute("errorMessage10","入力値が不正です。");
+		}else {
+			entity.setPrice_start(Integer.parseInt(ps));
+			entity.setPrice_end(Integer.parseInt(pe));
 		}
-			List<ProductEntity> products = searchProductService.searchResult(entity);
-			attributes.addFlashAttribute("products",products);
+		List<ProductEntity> products = searchProductService.searchResult(entity);
+		attributes.addFlashAttribute("products",products);
 		return "redirect:/search";//GETメソッドを呼び出す。検索データ表示
 	}
 

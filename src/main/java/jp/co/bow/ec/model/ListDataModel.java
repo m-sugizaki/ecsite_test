@@ -8,7 +8,6 @@ public class ListDataModel implements Serializable {
 	public ListDataModel(String label,String data) {
 		this.label=label;
 		this.data=data;
-
 	}
 	public String getLabel() {
 		return label;

@@ -49,17 +49,17 @@ button{
 		<table border="0">
 	<tr>
 	<th>商品名</th>
-	<td><form:input path="product_name"></form:input><div class ="underline"></div></td>
+	<td><form:input path="product_name" size="15"></form:input><div class ="underline"></div></td>
 	</tr>
 	<tr>
 	<th>メーカー</th>
-	<td><form:input path="maker"></form:input><div class ="underline"></div></td>
+	<td><form:input path="maker" size="15"></form:input><div class ="underline"></div></td>
 	</tr>
 	<tr>
 	<th>価格帯</th>
-	<td><form:input path="price_start"></form:input><div class ="underline"></div></td>
+	<td><form:input path="price_start" size="15"></form:input><div class ="underline"></div></td>
 	<td>～</td>
-	<td><form:input path="price_end"></form:input><div class ="underline"></div></td>
+	<td><form:input path="price_end" size="15"></form:input><div class ="underline"></div></td>
 	<td><form:button name="kensaku" class="btn">検索</form:button></td>
 	</tr>
 	</table>
