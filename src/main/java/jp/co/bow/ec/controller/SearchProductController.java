@@ -45,8 +45,6 @@ public class SearchProductController {
 		return "searchProduct";
 	}
 
-	//商品詳細画面に遷移
-
 	@RequestMapping(value="/search",method=RequestMethod.POST,params="kensaku")
 	public String getSearchResult(@ModelAttribute SearchProductInfoModel searchProductInfoModel, Model model, RedirectAttributes attributes) {
 		ProductEntity entity=new ProductEntity();
@@ -66,11 +64,9 @@ public class SearchProductController {
 			ps = "0";
 			entity.setPrice_start(Integer.parseInt(ps));
 			entity.setPrice_end(Integer.parseInt(pe));
-			entity.setPrice_end(Integer.parseInt(pe));
 		}else if(pe.isEmpty() ) {
 			pe = "2147483647";
 			entity.setPrice_end(Integer.parseInt(pe));
-			entity.setPrice_start(Integer.parseInt(ps));
 			entity.setPrice_start(Integer.parseInt(ps));
 		}else if((pe).compareTo(ps) < 0) {
 			attributes.addFlashAttribute("errorMessage10","入力値が不正です。");
