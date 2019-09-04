@@ -6,6 +6,8 @@ import jp.co.bow.ec.entity.Shipping_AddressEntity;
 import jp.co.bow.ec.entity.UserEntity;
 import jp.co.bow.ec.entity.User_StoreEntity;
 
+
+//テストですよーーーーーーーーーーーーーーーーーーーーー
 public interface UserRepository {
 	//ログイン時のIDとパスチェック
 	User_StoreEntity loginCheck(User_StoreEntity entity);
