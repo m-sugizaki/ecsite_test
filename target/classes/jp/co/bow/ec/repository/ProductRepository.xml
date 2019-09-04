@@ -22,7 +22,7 @@
 <select id="searchResult" parameterType="ProductEntity" resultMap="productResultMap">
 <![CDATA[
 	SELECT
-		product_id,product_name,maker,price,image
+		product_id,product_name,maker,price
 	FROM
 		product
 	WHERE
